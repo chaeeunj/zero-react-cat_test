@@ -15,9 +15,9 @@ function Header(props: Props) {
         <ProgressWrapper>
           <ProgressBar
             now={Math.round((props.questionNo / QuestionData.length) * 100)}
-            label={`${
-              Math.round(props.questionNo / QuestionData.length) * 100
-            }%`}
+            label={`${Math.round(
+              (props.questionNo / QuestionData.length) * 100,
+            )}%`}
             style={{ width: '100%', height: '30px' }}
           />
         </ProgressWrapper>
