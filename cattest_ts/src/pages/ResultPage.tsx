@@ -5,11 +5,12 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { ResultData } from '../stores/Result/ResultData';
 import Header from '../components/Header';
-import CatImage from '../assets/cat/cat.jpg';
+import { IResult } from '../stores/Result/types';
 
 function ResultPage(): React.ReactElement {
   const [searchParams] = useSearchParams();
-  const mbti = searchParams.get('mbti');
+  const mbti = searchParams.get('mbti'); // 집사의 mbti
+  const TestResult = ResultData.find((cat: IResult) => cat.best === mbti);
 
   return (
     <>
@@ -20,13 +21,17 @@ function ResultPage(): React.ReactElement {
           <ResultImage>
             <Image
               className="rounded-circle"
-              src={CatImage}
+              src={TestResult?.image}
               width={350}
               height={350}
             />
           </ResultImage>
           <Desc>
-            예비집사님과 찰떡궁합인 고양이는 {mbti}형 고양이 샴입니다.
+            {TestResult?.best}형 예비집사님과 찰떡궁합인 고양이는{' '}
+            {TestResult?.name}입니다.
+          </Desc>
+          <Desc>
+            {TestResult?.name} 고양이는 {TestResult?.desc}
           </Desc>
         </ContentsWrapper>
       </Wrapper>
@@ -51,7 +56,7 @@ const ContentsWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 20px;
-  padding: 20px 20px 20px 20px;
+  padding: 20px 60px 20px 60px;
 `;
 
 const Title = styled.div`
@@ -67,5 +72,5 @@ const ResultImage = styled.div`
 `;
 
 const Desc = styled.div`
-  font-size: 20pt;
+  font-size: 15pt;
 `;
