@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-import CatImage from '../assets/cat.jpg';
+import CatImage from '../assets/cat/cat.jpg';
 
 function MainPage(): React.ReactElement {
   const navigate = useNavigate();
