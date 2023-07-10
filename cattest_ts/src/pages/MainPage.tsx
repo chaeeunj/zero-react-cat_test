@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 import CatImage from '../assets/cat/cat.jpg';
@@ -16,10 +16,10 @@ function MainPage(): React.ReactElement {
   return (
     <Wrapper>
       <Header type="title" questionNo={0} />
-      <ContentsWapper>
+      <ContentsWrapper>
         <Title>나에게 맞는 주인님은?</Title>
         <LogoImage>
-          <img
+          <Image
             className="rounded-circle"
             src={CatImage}
             width={350}
@@ -35,7 +35,7 @@ function MainPage(): React.ReactElement {
         >
           테스트 시작하기
         </Button>
-      </ContentsWapper>
+      </ContentsWrapper>
     </Wrapper>
   );
 }
@@ -45,14 +45,13 @@ export default MainPage;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 100%;
   height: 100vh;
   background-color: #fffacd;
   font-family: 'YeongdeokSnowCrab';
 `;
 
-const ContentsWapper = styled.div`
+const ContentsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

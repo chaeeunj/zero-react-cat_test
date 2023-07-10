@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 
 import { QuestionData } from '../stores/Question/QuestionData';
 import Header from '../components/Header';
@@ -31,36 +31,20 @@ function QuestionPage(): React.ReactElement {
       setQuestionNo(questionNo + 1);
     } else {
       // 마지막 문제일 경우
-      navigate('/result');
+      const mbti = 'ENTJ';
+      navigate({
+        pathname: '/result',
+        search: `?${createSearchParams({
+          mbti: mbti,
+        })}`,
+      });
     }
-
-    // 위의 map을 사용하여 간단하게 줄임
-    //   if (type === 'EI') {
-    //     // 기존 스코어에 더한 새로운 스코어 값
-    //     const addScore = totalScore[0].score + ans;
-    //     // 새로운 스코어를 반영한 새로운 객체
-    //     const object = { id: 'EI', score: addScore };
-    //     // 새로운 객체를 기존의 토탈 스코어에 반영
-    //     totalScore.splice(0, 1, object);
-    //   } else if (type === 'SN') {
-    //     const addScore = totalScore[0].score + ans;
-    //     const object = { id: 'SN', score: addScore };
-    //     totalScore.splice(0, 1, object);
-    //   } else if (type === 'TF') {
-    //     const addScore = totalScore[0].score + ans;
-    //     const object = { id: 'TF', score: addScore };
-    //     totalScore.splice(0, 1, object);
-    //   } else {
-    //     const addScore = totalScore[0].score + ans;
-    //     const object = { id: 'JP', score: addScore };
-    //     totalScore.splice(0, 1, object);
-    //   }
   };
 
   return (
     <Wrapper>
       <Header type="progress" questionNo={questionNo} />
-      <ContentsWapper>
+      <ContentsWrapper>
         <Title>{QuestionData[questionNo].title}</Title>
         <ButtonGroup>
           <Button
@@ -83,7 +67,7 @@ function QuestionPage(): React.ReactElement {
             {QuestionData[questionNo].answerb}
           </Button>
         </ButtonGroup>
-      </ContentsWapper>
+      </ContentsWrapper>
     </Wrapper>
   );
 }
@@ -99,7 +83,7 @@ const Wrapper = styled.div`
   font-family: 'YeongdeokSnowCrab';
 `;
 
-const ContentsWapper = styled.div`
+const ContentsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
