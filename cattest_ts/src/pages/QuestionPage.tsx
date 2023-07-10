@@ -11,15 +11,13 @@ function QuestionPage(): React.ReactElement {
   const [totalScore, setTotalScore] = React.useState([
     { id: 'EI', score: 0 },
     { id: 'SN', score: 0 },
-    { id: 'TP', score: 0 },
+    { id: 'TF', score: 0 },
     { id: 'JP', score: 0 },
   ]);
 
   const navigate = useNavigate();
 
   const handleClickAnswer = (ans: number, type: string) => {
-    setQuestionNo(questionNo + 1);
-
     const newScore = totalScore.map(s =>
       s.id === type ? { id: s.id, score: s.score + ans } : s,
     );
@@ -31,13 +29,20 @@ function QuestionPage(): React.ReactElement {
       setQuestionNo(questionNo + 1);
     } else {
       // 마지막 문제일 경우
-      const mbti = 'ENTJ';
-      navigate({
-        pathname: '/result',
-        search: `?${createSearchParams({
-          mbti: mbti,
-        })}`,
-      });
+      const mbti = newScore.reduce(
+        (acc, curr) =>
+          acc +
+          (curr.score >= 2 ? curr.id.substring(0, 1) : curr.id.substring(1, 2)),
+        '',
+      );
+      console.log({ mbti });
+
+      // navigate({
+      //   pathname: '/result',
+      //   search: `?${createSearchParams({
+      //     mbti: mbti,
+      //   })}`,
+      // });
     }
   };
 
